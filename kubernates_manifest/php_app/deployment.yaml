@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: knowledgecity-deployment
+  labels:
+    app: knowledgecity
+spec:
+  selector:
+    matchLabels:
+      app: knowledgecity
+  template:
+    metadata:
+      labels:
+        app: knowledgecity
+    spec:
+      containers:
+        - name: knowledgecity
+          image: 511912777738.dkr.ecr.eu-west-1.amazonaws.com/knowledgecity:latest
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          ports:
+            - containerPort: 8000
+          env:
+            - name: APP_ENV
+              valueFrom:
+                configMapKeyRef:
+                  name: knowledgecity-config
+                  key: APP_ENV
+            - name: APP_DEBUG
+              valueFrom:
+                configMapKeyRef:
+                  name: knowledgecity-config
+                  key: APP_DEBUG
+            - name: DB_CONNECTION
+              valueFrom:
+                configMapKeyRef:
+                  name: knowledgecity-config
+                  key: DB_CONNECTION
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: knowledgecity-config
+                  key: DB_PORT
+            - name: APP_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: knowledgecity-secrets
+                  key: APP_KEY
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: knowledgecity-secrets
+                  key: DB_HOST
+            - name: DB_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: knowledgecity-secrets
+                  key: DB_DATABASE
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: knowledgecity-secrets
+                  key: DB_USERNAME
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: knowledgecity-secrets
+                  key: DB_PASSWORD
+          
+      imagePullSecrets:
+        - name: ecr-registry-secret

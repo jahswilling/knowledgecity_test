@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: knowledgecity-config
+  namespace: default
+data:
+  APP_ENV: "production"
+  APP_DEBUG: "false"
+  DB_CONNECTION: "mysql"
+  DB_PORT: "3306"
