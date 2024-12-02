@@ -35,7 +35,7 @@ jobs:
 
       - name: Sync React App with S3
         run: |
-          aws s3 sync public/ s3://knowledgecity-web-react --delete
+          aws s3 sync build/ s3://knowledgecity-web-react --delete
         working-directory: reactapp-frontend
 
       - name: Invalidate CloudFront

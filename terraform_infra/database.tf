@@ -45,18 +45,3 @@ resource "aws_security_group" "db_sg" {
     }
 }
 
-# resource "null_resource" "create_additional_databases" {
-#     for_each = toset(var.additional_databases)
-
-#     provisioner "local-exec" {
-#         command = <<EOT
-#         mysql -h ${aws_db_instance.db_knowledgecity.endpoint} \
-#               -P 3306 \
-#               -u ${aws_db_instance.db_knowledgecity.username} \
-#               -p${aws_db_instance.db_knowledgecity.password} \
-#               -e "CREATE DATABASE IF NOT EXISTS ${each.value};"
-#         EOT
-#     }
-
-#     depends_on = [aws_db_instance.db_knowledgecity]
-# }

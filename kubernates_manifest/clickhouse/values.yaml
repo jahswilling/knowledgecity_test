@@ -1,0 +1,23 @@
+replicaCount: 3
+
+persistence:
+  enabled: true
+  size: 10Gi
+  storageClass: "gp2"  # Use the "gp2" StorageClass
+
+resources:
+  requests:
+    memory: "2Gi"
+    cpu: "500m"
+  limits:
+    memory: "4Gi"
+    cpu: "1"
+
+service:
+  type: LoadBalancer  # Use LoadBalancer or ClusterIP based on your environment
+
+zookeeper:
+  persistence:
+    enabled: true
+    size: 10Gi
+    storageClass: "gp2"  # Add this for Zookeeper

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: clickhouse-pv
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 64Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ebs-sc
+  hostPath:
+    path: /mnt/clickhouse
+  persistentVolumeReclaimPolicy: Retain

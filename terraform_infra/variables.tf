@@ -72,4 +72,11 @@ variable "additional_databases" {
 }
 
 
+variable "video_bucket_name" {
+    description = "The name of the S3 bucket for videos."
+    type        = string
+    default     = "knowledgecity-media-videos" 
+}
+
+
 
