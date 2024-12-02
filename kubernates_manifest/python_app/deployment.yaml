@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: knowledgecity-deployment-media
+  labels:
+    app: knowledgecity-media
+spec:
+  selector:
+    matchLabels:
+      app: knowledgecity-media
+  template:
+    metadata:
+      labels:
+        app: knowledgecity-media
+    spec:
+      containers:
+        - name: knowledgecity-media
+          image: 511912777738.dkr.ecr.eu-west-1.amazonaws.com/knowledgecity_python:latest
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          ports:
+            - containerPort: 8000
+
