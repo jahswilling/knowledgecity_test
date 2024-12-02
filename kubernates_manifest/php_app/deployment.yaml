@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: knowledgecity
-          image: 511912777738.dkr.ecr.eu-west-1.amazonaws.com/knowledgecity:latest
+          image: 511912777738.dkr.ecr.eu-west-1.amazonaws.com/knowledgecity_php:latest
           resources:
             requests:
               cpu: "100m"
