@@ -13,9 +13,6 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Change to React Frontend Directory
-        run: cd reactapp-frontend
-
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
@@ -23,9 +20,11 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
+        working-directory: reactapp-frontend
 
       - name: Build React App
         run: npm run build
+        working-directory: reactapp-frontend
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -37,6 +36,7 @@ jobs:
       - name: Sync React App with S3
         run: |
           aws s3 sync public/ s3://knowledgecity-web-react --delete
+        working-directory: reactapp-frontend
 
-      - name: Invalidate CloudFront subdomain wwww. Cache
+      - name: Invalidate CloudFront
         run: AWS_MAX_ATTEMPTS=10 aws cloudfront create-invalidation --distribution-id E3C18YND9KORNM --paths /*
